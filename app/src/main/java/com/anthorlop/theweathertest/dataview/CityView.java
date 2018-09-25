@@ -14,6 +14,9 @@ public class CityView implements Parcelable {
     private Double north;
     private Double west;
 
+    private String lat;
+    private String lng;
+
     public CityView() {
     }
 
@@ -94,6 +97,22 @@ public class CityView implements Parcelable {
         return countryName;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
     /**
      * Set a value from countryName variable
      */
@@ -136,6 +155,8 @@ public class CityView implements Parcelable {
         dest.writeValue(this.south);
         dest.writeValue(this.north);
         dest.writeValue(this.west);
+        dest.writeString(this.lat);
+        dest.writeString(this.lng);
     }
 
     protected CityView(Parcel in) {
@@ -145,6 +166,8 @@ public class CityView implements Parcelable {
         this.south = (Double) in.readValue(Double.class.getClassLoader());
         this.north = (Double) in.readValue(Double.class.getClassLoader());
         this.west = (Double) in.readValue(Double.class.getClassLoader());
+        this.lat = in.readString();
+        this.lng = in.readString();
     }
 
     public static final Creator<CityView> CREATOR = new Creator<CityView>() {
