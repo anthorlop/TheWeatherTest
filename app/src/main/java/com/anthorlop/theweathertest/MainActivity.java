@@ -1,6 +1,5 @@
 package com.anthorlop.theweathertest;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,8 +11,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.anthorlop.theweathertest.activities.DetailActivity;
 import com.anthorlop.theweathertest.adapter.CitiesRecyclerViewAdapter;
+import com.anthorlop.theweathertest.data.PersistentData;
 import com.anthorlop.theweathertest.dataview.CityView;
 import com.anthorlop.theweathertest.interfaces.IMainPresenter;
 import com.anthorlop.theweathertest.interfaces.IMainView;
@@ -21,8 +20,6 @@ import com.anthorlop.theweathertest.interfaces.OnCityListener;
 import com.anthorlop.theweathertest.presenter.MainPresenter;
 
 import java.util.List;
-
-import static com.anthorlop.theweathertest.activities.DetailActivity.CITY_ITEM;
 
 public class MainActivity extends AppCompatActivity implements IMainView, OnCityListener {
 
@@ -61,17 +58,28 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnCity
             }
         });
 
+        List<CityView> cities = PersistentData.getHistoryCities(this);
+
+        loadData(cities);
+
     }
 
     @Override
     public void loadData(List<CityView> cities) {
-        if (mAdapter == null) {
-            mAdapter = new CitiesRecyclerViewAdapter(cities, this);
-            mRecyclerView.setAdapter(mAdapter);
-        } else {
-            mAdapter.setValues(cities);
-            mAdapter.notifyDataSetChanged();
+        if (cities != null && !cities.isEmpty()) {
+            if (mAdapter == null) {
+                mAdapter = new CitiesRecyclerViewAdapter(cities, this);
+                mRecyclerView.setAdapter(mAdapter);
+            } else {
+                mAdapter.setValues(cities);
+                mAdapter.notifyDataSetChanged();
+            }
         }
+    }
+
+    @Override
+    public void removeSearchData() {
+        mEditText.setText("");
     }
 
     @Override
@@ -81,13 +89,8 @@ public class MainActivity extends AppCompatActivity implements IMainView, OnCity
 
     @Override
     public void onCityClicked(CityView cityView) {
-        // go to Detail City
-
-        Intent i = new Intent(this, DetailActivity.class);
-
-        i.putExtra(CITY_ITEM, cityView);
-
-        startActivity(i);
+        // go to Detail City and save history
+        mPresenter.onCityClicked(this, cityView);
 
     }
 }
