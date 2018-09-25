@@ -3,6 +3,7 @@ package com.anthorlop.theweathertest.presenter;
 import android.support.annotation.NonNull;
 
 import com.anthorlop.theweathertest.data.ApiUtils;
+import com.anthorlop.theweathertest.data.Bbox;
 import com.anthorlop.theweathertest.data.GeoNamesResult;
 import com.anthorlop.theweathertest.data.Geoname;
 import com.anthorlop.theweathertest.dataview.CityView;
@@ -56,7 +57,6 @@ public class MainPresenter implements IMainPresenter {
 
                     mView.loadData(cities);
                 }
-
             }
 
             @Override
@@ -71,6 +71,13 @@ public class MainPresenter implements IMainPresenter {
         CityView cityView = new CityView();
 
         cityView.setName(geoname.getName());
+        cityView.setCountryName(geoname.getCountryName());
+
+        Bbox bbox = geoname.getBbox();
+        if (bbox != null) {
+            cityView.setGeoPositions(bbox.getEast(), bbox.getSouth(),
+                    bbox.getNorth(), bbox.getWest());
+        }
 
         return cityView;
 
