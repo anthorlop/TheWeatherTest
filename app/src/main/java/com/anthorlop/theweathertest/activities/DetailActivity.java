@@ -9,8 +9,13 @@ import android.widget.TextView;
 
 import com.anthorlop.theweathertest.R;
 import com.anthorlop.theweathertest.dataview.CityView;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     public static final String CITY_ITEM = "CITY_ITEM";
 
@@ -39,6 +44,12 @@ public class DetailActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.nameTxt)).setText(mCityView.getNameWithCountry());
 
+        SupportMapFragment mMapView = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
+
+        if (mMapView != null) {
+            mMapView.getMapAsync(this);
+        }
+
     }
 
     @Override
@@ -51,5 +62,13 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap gmap) {
+        gmap.setMinZoomPreference(12);
+
+        LatLng latlng = new LatLng(Double.valueOf(mCityView.getLat()), Double.valueOf(mCityView.getLng()));
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
     }
 }

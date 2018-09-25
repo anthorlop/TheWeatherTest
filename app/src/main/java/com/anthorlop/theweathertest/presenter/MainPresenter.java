@@ -101,6 +101,8 @@ public class MainPresenter implements IMainPresenter {
 
         cityView.setName(geoname.getName());
         cityView.setCountryName(geoname.getCountryName());
+        cityView.setLat(geoname.getLat());
+        cityView.setLng(geoname.getLng());
 
         Bbox bbox = geoname.getBbox();
         if (bbox != null) {
