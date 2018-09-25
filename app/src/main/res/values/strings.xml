@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TheWeatherTest</string>
+    <string name="city_et_hint">Type a city</string>
+</resources>
