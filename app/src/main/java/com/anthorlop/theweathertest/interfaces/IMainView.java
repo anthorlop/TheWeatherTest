@@ -10,4 +10,6 @@ public interface IMainView {
 
     void loadData(List<CityView> cities);
 
+    void removeSearchData();
+
 }

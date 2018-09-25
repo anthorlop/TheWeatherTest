@@ -119,6 +119,11 @@ public class CityView implements Parcelable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return name.equals(((CityView) obj).getName());
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
