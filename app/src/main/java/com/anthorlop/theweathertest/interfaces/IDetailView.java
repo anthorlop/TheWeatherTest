@@ -6,6 +6,8 @@ package com.anthorlop.theweathertest.interfaces;
 
 public interface IDetailView {
 
-    void loadTemperature(String temp);
+    void loadTemperature(float temp);
+
+    void loadMessageError(int messageResource);
 
 }

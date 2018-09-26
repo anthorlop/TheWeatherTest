@@ -1,7 +1,9 @@
 package com.anthorlop.theweathertest.presenter;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
+import com.anthorlop.theweathertest.R;
 import com.anthorlop.theweathertest.data.ApiUtils;
 import com.anthorlop.theweathertest.data.weather.WeatherObservation;
 import com.anthorlop.theweathertest.data.weather.WeatherResult;
@@ -38,24 +40,34 @@ public class DetailPresenter implements IDetailPresenter {
                     WeatherResult result = response.body();
 
                     if (result != null && result.getWeatherObservations() != null) {
-                        double temperature = 0;
+                        float temperature = 0;
                         int num = 0;
                         for (WeatherObservation wo : result.getWeatherObservations()) {
                             String temp = wo.getTemperature();
-                            temperature += Double.valueOf(temp);
-                            num++;
+                            if (!TextUtils.isEmpty(temp)) {
+                                temperature += Float.valueOf(temp);
+                                num++;
+                            }
                         }
-                        temperature = temperature/num;
-
-                        mView.loadTemperature(String.valueOf(temperature));
+                        if (num > 0) {
+                            temperature = temperature / num;
+                            mView.loadTemperature(temperature);
+                        } else {
+                            mView.loadMessageError(R.string.message_nodata_weather);
+                        }
+                    } else {
+                        mView.loadMessageError(R.string.message_nodata_weather);
                     }
+
+                } else {
+                    mView.loadMessageError(R.string.message_error_weather);
                 }
 
             }
 
             @Override
             public void onFailure(@NonNull Call<WeatherResult> call, @NonNull Throwable t) {
-                mView.loadTemperature("-");
+                mView.loadMessageError(R.string.message_error_weather);
             }
         });
     }

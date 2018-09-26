@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.anthorlop.theweathertest.R;
+import com.anthorlop.theweathertest.animations.ProgressBarAnimation;
 import com.anthorlop.theweathertest.dataview.CityView;
 import com.anthorlop.theweathertest.interfaces.IDetailPresenter;
 import com.anthorlop.theweathertest.interfaces.IDetailView;
@@ -24,14 +27,12 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     private CityView mCityView;
 
-    private IDetailPresenter mPresenter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mPresenter = new DetailPresenter(this);
+        IDetailPresenter presenter = new DetailPresenter(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,7 +58,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
             mMapView.getMapAsync(this);
         }
 
-        mPresenter.loadWeather(mCityView);
+        presenter.loadWeather(mCityView);
 
     }
 
@@ -75,15 +76,34 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     @Override
     public void onMapReady(GoogleMap gmap) {
-
-        gmap.setMinZoomPreference(12);
-
         LatLng latlng = new LatLng(Double.valueOf(mCityView.getLat()), Double.valueOf(mCityView.getLng()));
-        gmap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12.0f));
     }
 
     @Override
-    public void loadTemperature(String temp) {
-        ((TextView) findViewById(R.id.temperatureToolbarTxt)).setText(temp);
+    public void loadTemperature(float temp) {
+
+        ProgressBar progressBar = findViewById(R.id.progress_temp);
+        progressBar.setVisibility(View.VISIBLE);
+
+        TextView textView = findViewById(R.id.temperatureToolbarTxt);
+
+        if (temp < 0) {
+            // TODO implement negative temperatures
+        } else {
+            ProgressBarAnimation anim = new ProgressBarAnimation(progressBar, textView, 0, temp);
+            anim.setDuration(1500);
+            progressBar.startAnimation(anim);
+        }
+    }
+
+    @Override
+    public void loadMessageError(int messageResource) {
+
+        findViewById(R.id.progress_temp).setVisibility(View.GONE);
+
+        TextView textView = findViewById(R.id.temperatureToolbarTxt);
+
+        textView.setText(messageResource);
     }
 }
