@@ -8,6 +8,12 @@ import android.widget.TextView;
 
 import com.anthorlop.theweathertest.R;
 
+/**
+ * TheWeatherTest
+ *
+ * @author antonio.hormigo
+ *
+ */
 public class ProgressBarAnimation extends Animation {
 
     private ProgressBar mProgressBar;

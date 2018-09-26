@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PersistentData {
 
-    public static final String HISTORY_CITIES = "HistoryCities";
+    private static final String HISTORY_CITIES = "HistoryCities";
 
     public static void saveHistoryList(Context c, List<CityView> list) {
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);

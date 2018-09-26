@@ -25,10 +25,15 @@ import retrofit2.Response;
 
 import static com.anthorlop.theweathertest.activities.DetailActivity.CITY_ITEM;
 
+/**
+ * TheWeatherTest
+ * @author antonio.hormigo
+ */
 public class MainPresenter implements IMainPresenter {
 
     private static final int MAX_PAGES = 20;
     private static final String DEFAULT_LANG = "en";
+    private static final String GEO_NAME_SERVICE = "GeoNameService";
 
     private final IMainView mView;
 
@@ -43,13 +48,13 @@ public class MainPresenter implements IMainPresenter {
 
         mView.showLoading(true);
 
-        Log.d("GeoNameService", "url: " + call.request().url());
+        Log.d(GEO_NAME_SERVICE, "url: " + call.request().url());
         call.enqueue(new Callback<GeoNamesResult>() {
             @Override
             public void onResponse(@NonNull Call<GeoNamesResult> call, @NonNull Response<GeoNamesResult> response) {
 
                 Gson gson = new Gson();
-                Log.d("GeoNameService", "response: " + gson.toJson(response.body()));
+                Log.d(GEO_NAME_SERVICE, "response: " + gson.toJson(response.body()));
 
                 mView.showLoading(false);
 
@@ -104,9 +109,8 @@ public class MainPresenter implements IMainPresenter {
 
     private CityView convertGeoNameToCity(Geoname geoname) {
 
-        CityView cityView = new CityView();
+        CityView cityView = new CityView(geoname.getName());
 
-        cityView.setName(geoname.getName());
         cityView.setCountryName(geoname.getCountryName());
         cityView.setLat(geoname.getLat());
         cityView.setLng(geoname.getLng());

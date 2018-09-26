@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Geoname {
 
+    // TODO remove unnecessary data, for now we keep all in case we want to show more data in detail
+
     @SerializedName("timezone")
     @Expose
     private Timezone timezone;

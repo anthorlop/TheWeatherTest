@@ -1,7 +1,10 @@
 <resources>
+
     <string name="app_name">TheWeatherTest</string>
+
     <string name="city_et_hint">Type a city</string>
     <string name="message_error_weather">Error loading weather</string>
     <string name="message_nodata_weather">No weather data</string>
+    <string name="negative_temperature">Negative temperature</string>
 
 </resources>
