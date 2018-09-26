@@ -1,7 +1,5 @@
 package com.anthorlop.theweathertest.interfaces;
 
-import android.content.Context;
-
 import com.anthorlop.theweathertest.dataview.CityView;
 
 /**
@@ -10,10 +8,8 @@ import com.anthorlop.theweathertest.dataview.CityView;
  * @author antonio.hormigo
  *
  */
-public interface IMainPresenter {
+public interface IDetailPresenter {
 
-    void searchCities(String text);
-
-    void onCityClicked(Context context, CityView cityView);
+    void loadWeather(CityView cityView);
 
 }

@@ -3,8 +3,21 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="textTitleColor">#fff</color>
 
 
     <color name="progressbar_bg">#55000000</color>
+
+
+    <color name="temp_0">#1D71F2</color>
+    <color name="temp_1">#1C9CF6</color>
+    <color name="temp_2">#19C3FB</color>
+    <color name="temp_3">#F3F1AF</color>
+    <color name="temp_4">#FecD00</color>
+    <color name="temp_5">#EEAD22</color>
+    <color name="temp_6">#FF8000</color>
+    <color name="temp_7">#FF4000</color>
+    <color name="temp_8">#f00a0a</color>
+    <color name="temp_9">#B40404</color>
 
 </resources>

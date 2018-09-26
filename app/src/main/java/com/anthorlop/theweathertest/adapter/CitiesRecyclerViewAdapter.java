@@ -13,7 +13,11 @@ import com.anthorlop.theweathertest.interfaces.OnCityListener;
 
 import java.util.List;
 
-
+/**
+ * TheWeatherTest
+ *
+ * @author antonio.hormigo
+ */
 public class CitiesRecyclerViewAdapter extends RecyclerView.Adapter<CitiesRecyclerViewAdapter.ViewHolder> {
 
     private List<CityView> mValues;
@@ -37,7 +41,7 @@ public class CitiesRecyclerViewAdapter extends RecyclerView.Adapter<CitiesRecycl
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
 
-        holder.mNombre.setText(mValues.get(position).getName());
+        holder.mNombre.setText(mValues.get(position).getNameWithCountry());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
