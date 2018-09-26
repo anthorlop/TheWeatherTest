@@ -15,8 +15,4 @@ public class WeatherResult {
         return weatherObservations;
     }
 
-    public void setWeatherObservations(List<WeatherObservation> weatherObservations) {
-        this.weatherObservations = weatherObservations;
-    }
-
 }

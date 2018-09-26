@@ -17,7 +17,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * TheWeatherTest
+ * @author antonio.hormigo
+ */
 public class DetailPresenter implements IDetailPresenter {
+
+    private static final String GEO_NAME_SERVICE = "GeoNameService";
 
     private final IDetailView mView;
 
@@ -34,13 +40,13 @@ public class DetailPresenter implements IDetailPresenter {
                 cityView.getEast(),
                 cityView.getWest());
 
-        Log.d("GeoNameService", "url: " + call.request().url());
+        Log.d(GEO_NAME_SERVICE, "url: " + call.request().url());
         call.enqueue(new Callback<WeatherResult>() {
             @Override
             public void onResponse(@NonNull Call<WeatherResult> call, @NonNull Response<WeatherResult> response) {
 
                 Gson gson = new Gson();
-                Log.d("GeoNameService", "response: " + gson.toJson(response.body()));
+                Log.d(GEO_NAME_SERVICE, "response: " + gson.toJson(response.body()));
 
                 if (response.isSuccessful()) {
                     WeatherResult result = response.body();

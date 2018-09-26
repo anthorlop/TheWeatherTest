@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anthorlop.theweathertest.R;
 import com.anthorlop.theweathertest.animations.ProgressBarAnimation;
@@ -21,6 +22,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+/**
+ * TheWeatherTest
+ *
+ * @author antonio.hormigo
+ *
+ */
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback, IDetailView {
 
     public static final String CITY_ITEM = "CITY_ITEM";
@@ -90,6 +97,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
         if (temp < 0) {
             // TODO implement negative temperatures
+            Toast.makeText(this, R.string.negative_temperature, Toast.LENGTH_SHORT).show();
         } else {
             ProgressBarAnimation anim = new ProgressBarAnimation(progressBar, textView, 0, temp);
             anim.setDuration(1500);

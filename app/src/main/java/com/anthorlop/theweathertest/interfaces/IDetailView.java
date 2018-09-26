@@ -1,13 +1,17 @@
 package com.anthorlop.theweathertest.interfaces;
 
 /**
- * Created by antonio.hormigo on 26/9/18.
+ * TheWeatherTest
+ *
+ * @author antonio.hormigo
+ *
  */
-
 public interface IDetailView {
 
     void loadTemperature(float temp);
 
     void loadMessageError(int messageResource);
+
+    // TODO void loadTime(String timeHHmm);
 
 }

@@ -4,6 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+/**
+ * TheWeatherTest
+ *
+ * @author antonio.hormigo
+ *
+ */
 public class CityView implements Parcelable {
 
     private String name;
@@ -17,7 +23,8 @@ public class CityView implements Parcelable {
     private String lat;
     private String lng;
 
-    public CityView() {
+    public CityView(String name) {
+        this.name = name;
     }
 
     /**
@@ -49,24 +56,10 @@ public class CityView implements Parcelable {
     }
 
     /**
-     * Set a value from east variable
-     */
-    public void setEast(Double east) {
-        this.east = east;
-    }
-
-    /**
      * @return Gets the value of south and returns south
      */
     public Double getSouth() {
         return south;
-    }
-
-    /**
-     * Set a value from south variable
-     */
-    public void setSouth(Double south) {
-        this.south = south;
     }
 
     /**
@@ -77,24 +70,10 @@ public class CityView implements Parcelable {
     }
 
     /**
-     * Set a value from north variable
-     */
-    public void setNorth(Double north) {
-        this.north = north;
-    }
-
-    /**
      * @return Gets the value of west and returns west
      */
     public Double getWest() {
         return west;
-    }
-
-    /**
-     * @return Gets the value of countryName and returns countryName
-     */
-    public String getCountryName() {
-        return countryName;
     }
 
     public String getLat() {
@@ -130,16 +109,9 @@ public class CityView implements Parcelable {
         return result;
     }
 
-    /**
-     * Set a value from west variable
-     */
-    public void setWest(Double west) {
-        this.west = west;
-    }
-
     @Override
     public boolean equals(Object obj) {
-        return name.equals(((CityView) obj).getName());
+        return name.equals(((CityView) obj).getName()) || super.equals(obj);
     }
 
     @Override
