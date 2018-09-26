@@ -32,6 +32,16 @@ android:layout_height="match_parent">
             android:textStyle="bold"
             android:text="Madrid"/>
 
+
+        <TextView
+            android:id="@+id/temperatureToolbarTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:textColor="@color/textTitleColor"
+            android:textStyle="bold"
+            android:text="-"/>
+
     </LinearLayout>
 
 </android.support.design.widget.AppBarLayout>

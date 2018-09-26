@@ -28,7 +28,7 @@ public class MainPresenter implements IMainPresenter {
     private static final int MAX_PAGES = 20;
     private static final String DEFAULT_LANG = "en";
 
-    private IMainView mView;
+    private final IMainView mView;
 
     public MainPresenter(IMainView view) {
         mView = view;
