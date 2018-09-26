@@ -2,6 +2,7 @@ package com.anthorlop.theweathertest.presenter;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.anthorlop.theweathertest.R;
 import com.anthorlop.theweathertest.data.ApiUtils;
@@ -32,6 +33,7 @@ public class DetailPresenter implements IDetailPresenter {
                 cityView.getEast(),
                 cityView.getWest());
 
+        Log.d("GeoNameService", "url: " + call.request().url());
         call.enqueue(new Callback<WeatherResult>() {
             @Override
             public void onResponse(@NonNull Call<WeatherResult> call, @NonNull Response<WeatherResult> response) {

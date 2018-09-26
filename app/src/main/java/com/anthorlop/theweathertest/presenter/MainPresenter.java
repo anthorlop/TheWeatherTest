@@ -3,6 +3,7 @@ package com.anthorlop.theweathertest.presenter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.anthorlop.theweathertest.activities.DetailActivity;
 import com.anthorlop.theweathertest.data.ApiUtils;
@@ -40,6 +41,8 @@ public class MainPresenter implements IMainPresenter {
                 text, MAX_PAGES, 0, DEFAULT_LANG);
 
         mView.showLoading(true);
+
+        Log.d("GeoNameService", "url: " + call.request().url());
         call.enqueue(new Callback<GeoNamesResult>() {
             @Override
             public void onResponse(@NonNull Call<GeoNamesResult> call, @NonNull Response<GeoNamesResult> response) {
