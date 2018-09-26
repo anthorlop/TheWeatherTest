@@ -14,6 +14,7 @@ import com.anthorlop.theweathertest.data.PersistentData;
 import com.anthorlop.theweathertest.dataview.CityView;
 import com.anthorlop.theweathertest.interfaces.IMainView;
 import com.anthorlop.theweathertest.interfaces.IMainPresenter;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,9 @@ public class MainPresenter implements IMainPresenter {
         call.enqueue(new Callback<GeoNamesResult>() {
             @Override
             public void onResponse(@NonNull Call<GeoNamesResult> call, @NonNull Response<GeoNamesResult> response) {
+
+                Gson gson = new Gson();
+                Log.d("GeoNameService", "response: " + gson.toJson(response.body()));
 
                 mView.showLoading(false);
 
