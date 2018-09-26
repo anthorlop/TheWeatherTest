@@ -3,6 +3,7 @@ package com.anthorlop.theweathertest.presenter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.anthorlop.theweathertest.activities.DetailActivity;
 import com.anthorlop.theweathertest.data.ApiUtils;
@@ -13,6 +14,7 @@ import com.anthorlop.theweathertest.data.PersistentData;
 import com.anthorlop.theweathertest.dataview.CityView;
 import com.anthorlop.theweathertest.interfaces.IMainView;
 import com.anthorlop.theweathertest.interfaces.IMainPresenter;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +42,14 @@ public class MainPresenter implements IMainPresenter {
                 text, MAX_PAGES, 0, DEFAULT_LANG);
 
         mView.showLoading(true);
+
+        Log.d("GeoNameService", "url: " + call.request().url());
         call.enqueue(new Callback<GeoNamesResult>() {
             @Override
             public void onResponse(@NonNull Call<GeoNamesResult> call, @NonNull Response<GeoNamesResult> response) {
+
+                Gson gson = new Gson();
+                Log.d("GeoNameService", "response: " + gson.toJson(response.body()));
 
                 mView.showLoading(false);
 

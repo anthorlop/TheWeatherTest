@@ -2,6 +2,7 @@ package com.anthorlop.theweathertest.presenter;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.anthorlop.theweathertest.R;
 import com.anthorlop.theweathertest.data.ApiUtils;
@@ -10,6 +11,7 @@ import com.anthorlop.theweathertest.data.weather.WeatherResult;
 import com.anthorlop.theweathertest.dataview.CityView;
 import com.anthorlop.theweathertest.interfaces.IDetailPresenter;
 import com.anthorlop.theweathertest.interfaces.IDetailView;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +34,13 @@ public class DetailPresenter implements IDetailPresenter {
                 cityView.getEast(),
                 cityView.getWest());
 
+        Log.d("GeoNameService", "url: " + call.request().url());
         call.enqueue(new Callback<WeatherResult>() {
             @Override
             public void onResponse(@NonNull Call<WeatherResult> call, @NonNull Response<WeatherResult> response) {
+
+                Gson gson = new Gson();
+                Log.d("GeoNameService", "response: " + gson.toJson(response.body()));
 
                 if (response.isSuccessful()) {
                     WeatherResult result = response.body();

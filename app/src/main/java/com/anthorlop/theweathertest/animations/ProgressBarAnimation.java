@@ -9,24 +9,25 @@ import android.widget.TextView;
 import com.anthorlop.theweathertest.R;
 
 public class ProgressBarAnimation extends Animation {
-    private ProgressBar progressBar;
-    private TextView textView;
-    private float from;
-    private float  to;
+
+    private ProgressBar mProgressBar;
+    private TextView mTextView;
+    private float mFrom;
+    private float  mTo;
 
     public ProgressBarAnimation(ProgressBar progressBar, TextView textView, float from, float to) {
         super();
-        this.progressBar = progressBar;
-        this.textView = textView;
-        this.from = from;
-        this.to = to;
+        mProgressBar = progressBar;
+        mTextView = textView;
+        mFrom = from;
+        mTo = to;
     }
 
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation t) {
         super.applyTransformation(interpolatedTime, t);
-        float value = from + (to - from) * interpolatedTime;
-        progressBar.setProgress((int) value);
+        float value = mFrom + (mTo - mFrom) * interpolatedTime;
+        mProgressBar.setProgress((int) value);
 
         int color = R.color.temp_8;
 
@@ -46,17 +47,17 @@ public class ProgressBarAnimation extends Animation {
             color = R.color.temp_7;
         }
 
-        progressBar.getProgressDrawable().setColorFilter(
-                ContextCompat.getColor(progressBar.getContext(), color), android.graphics.PorterDuff.Mode.SRC_IN);
+        mProgressBar.getProgressDrawable().setColorFilter(
+                ContextCompat.getColor(mProgressBar.getContext(), color), android.graphics.PorterDuff.Mode.SRC_IN);
 
         String temperature = String.valueOf(value);
 
         if (temperature.length() > 4) {
             temperature = temperature.substring(0, 4);
         }
-        textView.setText(temperature);
+        mTextView.setText(temperature);
 
-        textView.setTextColor(ContextCompat.getColor(textView.getContext(), color));
+        mTextView.setTextColor(ContextCompat.getColor(mTextView.getContext(), color));
     }
 
 }
